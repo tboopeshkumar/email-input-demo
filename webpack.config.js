@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -20,20 +21,17 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: ["ts-loader"],
-      },
-      {
-        test: /\.(css|scss)$/,
-        use: ["style-loader", "css-loader", "css-modules-typescript-loader"],
-      },
-      {
-        test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
-        use: ["file-loader"],
-      },
+      }     
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
+    }),
+    new CopyPlugin({
+        patterns: [
+          { from: "static/*.*", to: "./" },          
+        ],
     }),
   ],
 };
