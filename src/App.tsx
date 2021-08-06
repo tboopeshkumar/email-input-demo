@@ -1,10 +1,8 @@
 import React from "react";
-import {EmailInput} from 'email-input-component';
+import {EmailInput} from 'email-input-lib';
 const App: React.FC<{}> = () => {
   return (
-    <div>
-       <EmailInput theme="primary"/>
-    </div>
+    <EmailInput theme="primary"/>
   );
 };
 

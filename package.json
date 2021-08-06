@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Boopesh Kumar",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.13.8",
@@ -36,7 +36,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "email-input-component": "file:email-input-react-component-lib/email-input-component-1.0.0.tgz",
+    "email-input-lib": "file:email-input-lib/email-input-lib-1.0.0.tgz",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.1.1",
