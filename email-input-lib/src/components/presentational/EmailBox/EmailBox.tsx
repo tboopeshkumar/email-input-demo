@@ -31,7 +31,7 @@ interface EmailBoxProps {
 }
 export const EmailBox:React.FC<EmailBoxProps> = ({data, onDeleteEmail}) => {
     return (
-        <StyledDiv valid={data.isValid}>
+        <StyledDiv valid={data.isValid} data-testid="email-box-component">
             <span>{data.id}</span>
             <StyledCloseButton
                 type="button"             

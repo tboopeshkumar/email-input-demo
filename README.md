@@ -1,10 +1,10 @@
-## Emails Input
+# Emails Input
 
-Deployed version of standalone application available 
+Demo application available :
 
-[https://tboopeshkumar.github.io/email-input-demo](https://tboopeshkumar.github.io/email-input-demo)
+> [https://tboopeshkumar.github.io/email-input-demo](https://tboopeshkumar.github.io/email-input-demo)
 
-Note : This is hosted as react app. But email-input.js can also be used standalone in any static web page. 
+Note : This is hosted as react app. But **email-input.js** can also be used standalone in any static web page. 
 
 ## Available Scripts
 
