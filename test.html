@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Input Test</title>
+    <script src="emails-input.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+      .email-action-btn {
+        margin-top: 10px;
+        margin-right: 10px;
+        background: #4262FF;
+        border-radius: 6px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #FFFFFF;
+        border: none;
+      }
+      html, body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+      *{
+        box-sizing: border-box;
+      }
+      #email-input-root-container{        
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #email-input-card {
+        display: flex;
+        flex-direction: column;
+        width: 550px;  
+        background: #FFFFFF;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;          
+      }
+      #email-input-container {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        background: #F8F8F7;
+      }
+      #emails-input{        
+        background: #FFFFFF;
+        margin-top: 25px;
+      }
+      #email-action-container{
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+      }
+      #email-input-header{
+        font-size: 20px;
+      }
+    </style>
+</head>
+<body>
+  <div id="email-input-root-container">
+    <div id="email-input-card">
+      <div id="email-input-container">
+        <span id="email-input-header">Share <strong>Project name</strong> with others</span>
+        <div id="emails-input"></div>
+      </div>      
+      <div id="email-action-container">
+       <button id="add-email-btn" class="email-action-btn">Add Email</button>
+       <button id="get-email-count-btn" class="email-action-btn">Get Emails Count</button>
+       <span id="email-count-text"></span>
+      </div>   
+    </div>  
+  </div>
+</body>
+
+<script>
+  const inputContainerNode = document.querySelector('#emails-input');
+  const emailsInput = EmailsInput(inputContainerNode);
+  const addEmailBtn = document.querySelector('#add-email-btn');
+  const getEmailCountBtn = document.querySelector('#get-email-count-btn');
+  const emailCountText = document.querySelector('#email-count-text');
+  addEmailBtn.addEventListener('click', ()=> {
+    const randomEmailId = Math.random().toString(36).substr(2, 5);
+    const newEmail = `email${randomEmailId}@test.com`;
+    emailsInput.addEmail(newEmail);
+    
+  });
+  getEmailCountBtn.addEventListener('click', ()=>{
+    const count = emailsInput.getEmailsCount();
+    emailCountText.innerHTML = count;
+  });
+</script>
+
+</html>
