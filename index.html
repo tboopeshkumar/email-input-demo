@@ -57,15 +57,26 @@
       #emails-input{        
         background: #FFFFFF;
         margin-top: 25px;
+        display: flex;
+        max-height: 150px;
       }
       #email-action-container{
         padding-left: 50px;
         padding-right: 50px;
         padding-top: 25px;
         padding-bottom: 25px;
+        display: grid;
+        grid-template-columns: auto auto 40px auto;
       }
       #email-input-header{
         font-size: 20px;
+      }
+      #email-count-text{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-top: 8px;
       }
     </style>
 </head>
@@ -79,7 +90,8 @@
       <div id="email-action-container">
        <button id="add-email-btn" class="email-action-btn">Add Email</button>
        <button id="get-email-count-btn" class="email-action-btn">Get Emails Count</button>
-       <span id="email-count-text"></span>
+       <div id="email-count-text"></div>
+       <button id="replace-all-email-btn" class="email-action-btn" style="margin-left: 5px;">Replace All</button>
       </div>   
     </div>  
   </div>
@@ -91,35 +103,28 @@
   const addEmailBtn = document.querySelector('#add-email-btn');
   const getEmailCountBtn = document.querySelector('#get-email-count-btn');
   const emailCountText = document.querySelector('#email-count-text');
-
-  const testEmailInputApis = () => {    
-    const allEmails = emailsInput.getAllEmails();
-    console.log(allEmails);
-
-    const newEmails = allEmails.map(e => ({
-      existingId: e.id,
-      newId: `n_${e.id}`
-    }));
-    console.log(newEmails);
-    emailsInput.replaceAll(newEmails);
-  }
-  
+  const replaceAllBtn = document.querySelector('#replace-all-email-btn');
 
   addEmailBtn.addEventListener('click', ()=> {
     const randomEmailId = Math.random().toString(36).substr(2, 5);
     const newEmail = `email${randomEmailId}@test.com`;
     emailsInput.addEmail(newEmail);    
   });
+
+  replaceAllBtn.addEventListener('click', () =>{
+    const allEmails = emailsInput.getAllEmails();
+    const newEmails = allEmails.map(e => ({
+      existingId: e.id,
+      newId: `n_${e.id}`
+    }));    
+    emailsInput.replaceAll(newEmails);
+  });
+
   getEmailCountBtn.addEventListener('click', ()=>{
     const count = emailsInput.getEmailsCount();
     emailCountText.innerHTML = count;
-    
-    // *****
-    // NOTE : testing emailInput public apis on Get Email Count button click 
-    testEmailInputApis();
-    // ***
-
   });
+
   
   emailsInput.subscribeEmailListChange((emailList, operation) => {
     console.log(emailList, operation);
