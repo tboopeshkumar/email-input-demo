@@ -91,6 +91,20 @@
   const addEmailBtn = document.querySelector('#add-email-btn');
   const getEmailCountBtn = document.querySelector('#get-email-count-btn');
   const emailCountText = document.querySelector('#email-count-text');
+
+  const testEmailInputApis = () => {    
+    const allEmails = emailsInput.getAllEmails();
+    console.log(allEmails);
+
+    const newEmails = allEmails.map(e => ({
+      existingId: e.id,
+      newId: `n_${e.id}`
+    }));
+    console.log(newEmails);
+    emailsInput.replaceAll(newEmails);
+  }
+  
+
   addEmailBtn.addEventListener('click', ()=> {
     const randomEmailId = Math.random().toString(36).substr(2, 5);
     const newEmail = `email${randomEmailId}@test.com`;
@@ -110,18 +124,6 @@
   emailsInput.subscribeEmailListChange((emailList, operation) => {
     console.log(emailList, operation);
   }); 
-
-  const testEmailInputApis = () => {    
-    const allEmails = emailsInput.getAllEmails();
-    console.log(allEmails);
-
-    const newEmails = allEmails.map(e => ({
-      existingId: e.id,
-      newId: `n_${e.id}`
-    }));
-    console.log(newEmails);
-    emailsInput.replaceAll(newEmails);
-  }
   
 </script>
 
