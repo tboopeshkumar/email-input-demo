@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App, { AppRef } from "./App";
 
-const EmailsInput = (el) => {
-    ReactDOM.render(
-        <App />,
+const EmailsInput = (el) => {   
+    const appRef = React.createRef<AppRef>();
+    ReactDOM.render(        
+        <App ref={appRef}/>,
       el
     );
+    return {
+        getEmailsCount: () => {
+            return appRef.current?.getEmailsCount();
+        },
+        addEmail: (email: string) => {
+            appRef.current?.addEmail(email);
+        }
+    }
 }
 console.log(process.env.NODE_ENV);
 // If we are in development and in isolation,

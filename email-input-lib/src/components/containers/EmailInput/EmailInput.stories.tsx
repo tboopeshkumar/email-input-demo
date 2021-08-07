@@ -5,6 +5,4 @@ export default {
   title: "EmailInput"
 };
 
-export const Primary = () => <EmailInput theme="primary" />;
-
-export const Secondary = () => <EmailInput theme="secondary" />;
+export const Primary = () => <EmailInput />;

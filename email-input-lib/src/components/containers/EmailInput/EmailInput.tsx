@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useImperativeHandle } from "react";
 import styled from "styled-components";
 import { Email } from "../../../types/Email";
 import { isValidEmail } from "../../../utils/email-validation-utils";
 import { EmailBox } from "../../presentational/EmailBox/EmailBox";
 import { InputBox } from "../../presentational/InputBox/InputBox";
 
-import { EmailInputComponentProps } from "./EmailInput.types";
+import { EmailInputComponentProps, EmailInputComponentRef } from "./EmailInput.types";
 
 const StyledDiv = styled.div`
   display: flex;  
@@ -14,15 +14,22 @@ const StyledDiv = styled.div`
   border: 1px solid #C3C2CF;
   border-radius: 4px;
   padding: 8px;
-  width: 100%;
+  box-sizing: border-box;
+  min-width: 440px;
+  min-height: 96px;
+  `;
 
-  ${(props) =>
-    props.theme === "secondary" &&
-    `background-color: black;
-     color: white;`}
-`;
+const EmailInput = React.forwardRef<EmailInputComponentProps, EmailInputComponentRef>((props, ref) => {
+    
+    useImperativeHandle(ref, () => ({
+        getEmailsCount: () => {            
+            return emailList.length;
+        },
+        addEmail: (email: string) => {
+            updateEmailList([email]);
+        }        
+    }));
 
-const EmailInput: React.FC<EmailInputComponentProps> = ({ theme }) => {
 
     const [emailList, setEmailList] = useState<Email[]>([]);  
     const handleDeleteEmail = email => {
@@ -50,9 +57,9 @@ const EmailInput: React.FC<EmailInputComponentProps> = ({ theme }) => {
     }
 
     return (
-        <StyledDiv data-testid="test-component" theme={theme}>
+        <StyledDiv data-testid="email-input-component">
             {emailList.map(item => (
-              <EmailBox data={item} onDeleteEmail={handleDeleteEmail}/>  
+              <EmailBox key={item.id} data={item} onDeleteEmail={handleDeleteEmail}/>  
             ))}  
             <InputBox onNewEmailAdded={handleNewEmailAdded} 
                 onNewEmailsPasted={handleNewEmailsPasted} 
@@ -61,6 +68,6 @@ const EmailInput: React.FC<EmailInputComponentProps> = ({ theme }) => {
     )
 
  
-};
+});
 
 export default EmailInput;

@@ -1,3 +1,8 @@
 export interface EmailInputComponentProps {
-    theme: "primary" | "secondary";
+ 
+}
+
+export interface EmailInputComponentRef {
+    addEmail: (email: string) => void;
+    getEmailsCount: () => number;
 }

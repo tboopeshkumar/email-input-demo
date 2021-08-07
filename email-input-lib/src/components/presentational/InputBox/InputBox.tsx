@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const StyledInput = styled.input`   
     max-width: 125px;
-    min-width: 125px;    
+    min-width: 125px; 
+    height: 25px;   
     margin: 4px;
     &:focus-visible {
         outline: none;
@@ -17,10 +18,8 @@ interface InputBoxProps {
 }
 export const InputBox:React.FC<InputBoxProps> = ({onNewEmailAdded, onNewEmailsPasted}) => {
     const [value, setValue] = useState('');
-    const handleKeyDown = evt => {
-        console.log("current event key", evt.key);
-        if (["Enter", "Tab", ","].includes(evt.key)) {
-            console.log("matches delimiter key", evt.key);
+    const handleKeyDown = evt => {       
+        if (["Enter", "Tab", ","].includes(evt.key)) {            
             evt.preventDefault();      
             updateNewEmail();
         }
