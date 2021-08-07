@@ -19,7 +19,8 @@ interface InputBoxProps {
 export const InputBox:React.FC<InputBoxProps> = ({onNewEmailAdded, onNewEmailsPasted}) => {
     const [value, setValue] = useState('');
     const handleKeyDown = evt => {       
-        if (["Enter", "Tab", ","].includes(evt.key)) {            
+        console.log(evt.key);
+        if (["Enter", "Tab", ","].indexOf(evt.key) != -1) {            
             evt.preventDefault();      
             updateNewEmail();
         }

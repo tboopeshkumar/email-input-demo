@@ -13,8 +13,7 @@ const EmailBoxContainer = styled.div<{valid: boolean}>`
     padding-left: 7px;
     display: table;    
     white-space: nowrap;
-    table-layout: fixed;
-    width: 100%;
+    table-layout: fixed;   
 `;
 
 const EmailDeleteButton = styled.button`
