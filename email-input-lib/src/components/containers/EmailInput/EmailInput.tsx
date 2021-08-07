@@ -7,7 +7,7 @@ import { InputBox } from "../../presentational/InputBox/InputBox";
 
 import { EmailChangeCallback, EmailInputComponentProps, EmailInputComponentRef } from "./EmailInput.types";
 
-const StyledDiv = styled.div`
+const EmailInputContainer = styled.div`
   display: flex;  
   flex-direction: row; 
   flex-wrap: wrap;
@@ -17,6 +17,8 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
   min-width: 440px;
   min-height: 96px;
+  overflow-y: auto;
+  width: 100%;
   `;
 
 const EmailInput = React.forwardRef<EmailInputComponentProps, EmailInputComponentRef>((props, ref) => {
@@ -79,14 +81,14 @@ const EmailInput = React.forwardRef<EmailInputComponentProps, EmailInputComponen
     }
 
     return (
-        <StyledDiv data-testid="email-input-component">
+        <EmailInputContainer data-testid="email-input-component">
             {emailList.map(item => (
               <EmailBox key={item.id} data={item} onDeleteEmail={handleDeleteEmail}/>  
             ))}  
             <InputBox onNewEmailAdded={handleNewEmailAdded} 
                 onNewEmailsPasted={handleNewEmailsPasted} 
             />                      
-        </StyledDiv>
+        </EmailInputContainer>
     )
 
  

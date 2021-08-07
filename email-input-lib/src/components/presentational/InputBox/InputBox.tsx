@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 
-const StyledInput = styled.input`   
+const EmailInput = styled.input`   
     max-width: 125px;
     min-width: 125px; 
     height: 25px;   
@@ -47,7 +47,7 @@ export const InputBox:React.FC<InputBoxProps> = ({onNewEmailAdded, onNewEmailsPa
         }
     };
     return (
-        <StyledInput               
+        <EmailInput               
             value={value}
             placeholder="add more people..."
             onKeyDown={handleKeyDown}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Email } from '../../../types/Email';
 import styled from "styled-components";
 
-const StyledDiv = styled.div<{valid: boolean}>`
+const EmailBoxContainer = styled.div<{valid: boolean}>`
     border-radius: ${props => props.valid ? '10px' : '0px'};   
     align-items: center;
     background-color: ${props => props.valid ? 'rgba(102, 153, 255, 0.2)' : 'transparent'};
@@ -13,9 +13,10 @@ const StyledDiv = styled.div<{valid: boolean}>`
     padding-left: 7px;
     display: grid;
     grid-template-columns: 1fr 20px;
+    white-space: nowrap;
 `;
 
-const StyledCloseButton = styled.button`
+const EmailDeleteButton = styled.button`
     border: none;
     background: none;
     color: #050038;
@@ -26,7 +27,7 @@ const StyledCloseButton = styled.button`
     }
 `;
 
-const StyledEmailTextDiv = styled.div`
+const EmailTextContainer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis
 `;
@@ -36,14 +37,14 @@ interface EmailBoxProps {
 }
 export const EmailBox:React.FC<EmailBoxProps> = ({data, onDeleteEmail}) => {
     return (
-        <StyledDiv valid={data.isValid} data-testid="email-box-component" title={data.id}>
-            <StyledEmailTextDiv>{data.id}</StyledEmailTextDiv>
-            <StyledCloseButton
+        <EmailBoxContainer valid={data.isValid} data-testid="email-box-component" title={data.id}>
+            <EmailTextContainer>{data.id}</EmailTextContainer>
+            <EmailDeleteButton
                 type="button"             
                 onClick={() => onDeleteEmail?.(data)}
             >
             &times;
-        </StyledCloseButton>
-    </StyledDiv>
+            </EmailDeleteButton>
+        </EmailBoxContainer>
     )
 }
