@@ -24,13 +24,10 @@ module.exports = {
       }     
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, "public", "index.html"),
-    }),
+  plugins: [   
     new CopyPlugin({
         patterns: [
-          { from: "static/"},          
+          { from: "public/"},          
         ],
     }),
   ],
