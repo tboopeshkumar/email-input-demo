@@ -15,9 +15,7 @@ const EmailInputContainer = styled.div`
   border: 1px solid #C3C2CF;
   border-radius: 4px;
   padding: 8px;
-  box-sizing: border-box;
-  min-width: 440px;
-  min-height: 96px;
+  box-sizing: border-box;  
   overflow-y: auto;
   -ms-overflow-x: auto;
   align-content: flex-start;

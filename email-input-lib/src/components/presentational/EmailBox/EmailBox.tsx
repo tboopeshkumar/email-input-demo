@@ -9,11 +9,12 @@ const EmailBoxContainer = styled.div<{valid: boolean}>`
     border-bottom: ${props => props.valid ? 'none' : '1px dashed #D92929'};
     max-width: 175px;  
     height: 25px;      
-    margin: 2px;   
+    margin: 2px;  
+    margin-right: ${props => props.valid ? '2px' : '5px'};    
     padding-left: 7px;
-    display: table;    
-    white-space: nowrap;
-    table-layout: fixed;   
+    display: inline-block;    
+    white-space: nowrap;    
+    width: auto; 
 `;
 
 const EmailDeleteButton = styled.button`
@@ -25,15 +26,16 @@ const EmailDeleteButton = styled.button`
     &:hover {
         color: red 
     }
-    display: table-cell;
-    width: 15%;
+    display: inline-block;
+    margin-left: -20px;    
 `;
 
 const EmailTextContainer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
-    display: table-cell;
-    width: 85%;
+    display: inline-block;
+    width: 100%;
+    padding-right: 20px;
 `;
 interface EmailBoxProps {
     onDeleteEmail: (email: Email) => void;
