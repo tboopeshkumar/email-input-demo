@@ -1,20 +1,21 @@
+import { EmailChangeCallback, EmailInput, EmailInputComponentRef, EmailReplace } from "email-input-lib";
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
-import App, { AppRef } from "./App";
 
 const EmailsInput = (el) => {   
-    const appRef = React.createRef<AppRef>();
+    const emailInputRef = React.createRef<EmailInputComponentRef>();
     ReactDOM.render(        
-        <App ref={appRef}/>,
+        <EmailInput ref={emailInputRef}/>,
       el
     );
     return {
-        getEmailsCount: () => {
-            return appRef.current?.getEmailsCount();
+        getEmailsCount: () =>emailInputRef.current?.getEmailsCount(),
+        addEmail: (email: string) => emailInputRef.current?.addEmail(email),
+        getAllEmails: () => emailInputRef.current?.getAllEmails(),
+        subscribeEmailListChange: (emailChangeCallback:EmailChangeCallback) => {
+            emailInputRef.current?.subscribeEmailListChange(emailChangeCallback);
         },
-        addEmail: (email: string) => {
-            appRef.current?.addEmail(email);
-        }
+        replaceAll:(newEmails: EmailReplace[]) => emailInputRef.current?.replaceAll(newEmails)
     }
 }
 console.log(process.env.NODE_ENV);
