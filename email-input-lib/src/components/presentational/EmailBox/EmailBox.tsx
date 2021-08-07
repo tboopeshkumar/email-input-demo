@@ -11,9 +11,10 @@ const EmailBoxContainer = styled.div<{valid: boolean}>`
     height: 25px;      
     margin: 2px;   
     padding-left: 7px;
-    display: grid;
-    grid-template-columns: 1fr 20px;
+    display: table;    
     white-space: nowrap;
+    table-layout: fixed;
+    width: 100%;
 `;
 
 const EmailDeleteButton = styled.button`
@@ -25,11 +26,15 @@ const EmailDeleteButton = styled.button`
     &:hover {
         color: red 
     }
+    display: table-cell;
+    width: 15%;
 `;
 
 const EmailTextContainer = styled.div`
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    display: table-cell;
+    width: 85%;
 `;
 interface EmailBoxProps {
     onDeleteEmail: (email: Email) => void;

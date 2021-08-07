@@ -9,6 +9,7 @@ import { EmailChangeCallback, EmailInputComponentProps, EmailInputComponentRef }
 
 const EmailInputContainer = styled.div`
   display: flex;  
+  display: -ms-flexbox;  
   flex-direction: row; 
   flex-wrap: wrap;
   border: 1px solid #C3C2CF;
@@ -18,6 +19,8 @@ const EmailInputContainer = styled.div`
   min-width: 440px;
   min-height: 96px;
   overflow-y: auto;
+  -ms-overflow-x: auto;
+  align-content: flex-start;
   width: 100%;
   `;
 
@@ -38,7 +41,7 @@ const EmailInput = React.forwardRef<EmailInputComponentProps, EmailInputComponen
         },
         replaceAll:(newEmails: EmailReplace[]) => {
             const modifiedEmails = emailList?.map(ee => {
-                const newEmail = newEmails.find(ne => ne.existingId == ee.id);
+                const newEmail = newEmails.filter(ne => ne.existingId == ee.id)[0];
                 if(newEmail) {
                     return {
                         id: newEmail.newId,

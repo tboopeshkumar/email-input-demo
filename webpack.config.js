@@ -8,19 +8,36 @@ module.exports = {
   mode: process.env.NODE_ENV || "development",
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-  },
+  }, 
   devServer: { contentBase: path.join(__dirname, "src") },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', {
+                useBuiltIns: 'usage',
+                corejs: 3
+              }]
+            ]
+          }
+        }
       },
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ["ts-loader"],
+        use: [{
+          loader: 'ts-loader',
+          options: {            
+            compilerOptions: {
+              target: 'es5'
+            }
+          }
+        }],
       }     
     ],
   },

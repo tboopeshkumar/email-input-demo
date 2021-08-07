@@ -59,14 +59,15 @@
         margin-top: 25px;
         display: flex;
         max-height: 150px;
+        height: 150px;
       }
       #email-action-container{
         padding-left: 50px;
         padding-right: 50px;
         padding-top: 25px;
         padding-bottom: 25px;
-        display: grid;
-        grid-template-columns: auto auto 40px auto;
+        display: flex;
+        display: -ms-flexbox;        
       }
       #email-input-header{
         font-size: 20px;
@@ -77,6 +78,7 @@
         justify-content: center;
         font-weight: bold;
         margin-top: 8px;
+        width: 40px;
       }
     </style>
 </head>
@@ -95,41 +97,41 @@
       </div>   
     </div>  
   </div>
+  <script>
+    const inputContainerNode = document.querySelector('#emails-input');
+    const emailsInput = EmailsInput(inputContainerNode);
+    const addEmailBtn = document.querySelector('#add-email-btn');
+    const getEmailCountBtn = document.querySelector('#get-email-count-btn');
+    const emailCountText = document.querySelector('#email-count-text');
+    const replaceAllBtn = document.querySelector('#replace-all-email-btn');
+  
+    addEmailBtn.addEventListener('click', function() {
+      const randomEmailId = Math.random().toString(36).substr(2, 5);
+      const newEmail = 'email'+randomEmailId+'@test.com';
+      emailsInput.addEmail(newEmail);    
+    });
+  
+    replaceAllBtn.addEventListener('click', function(){
+      const allEmails = emailsInput.getAllEmails();
+      const newEmails = allEmails.map(function(e){
+        return {
+          existingId: e.id,
+          newId: 'n_'+e.id
+        }
+      });    
+      emailsInput.replaceAll(newEmails);
+    });
+  
+    getEmailCountBtn.addEventListener('click',function(){
+      const count = emailsInput.getEmailsCount();
+      emailCountText.innerHTML = count;
+    });
+  
+    
+    emailsInput.subscribeEmailListChange(function(emailList, operation){
+      console.log(emailList, operation);
+    }); 
+    
+  </script>
 </body>
-
-<script>
-  const inputContainerNode = document.querySelector('#emails-input');
-  const emailsInput = EmailsInput(inputContainerNode);
-  const addEmailBtn = document.querySelector('#add-email-btn');
-  const getEmailCountBtn = document.querySelector('#get-email-count-btn');
-  const emailCountText = document.querySelector('#email-count-text');
-  const replaceAllBtn = document.querySelector('#replace-all-email-btn');
-
-  addEmailBtn.addEventListener('click', ()=> {
-    const randomEmailId = Math.random().toString(36).substr(2, 5);
-    const newEmail = `email${randomEmailId}@test.com`;
-    emailsInput.addEmail(newEmail);    
-  });
-
-  replaceAllBtn.addEventListener('click', () =>{
-    const allEmails = emailsInput.getAllEmails();
-    const newEmails = allEmails.map(e => ({
-      existingId: e.id,
-      newId: `n_${e.id}`
-    }));    
-    emailsInput.replaceAll(newEmails);
-  });
-
-  getEmailCountBtn.addEventListener('click', ()=>{
-    const count = emailsInput.getEmailsCount();
-    emailCountText.innerHTML = count;
-  });
-
-  
-  emailsInput.subscribeEmailListChange((emailList, operation) => {
-    console.log(emailList, operation);
-  }); 
-  
-</script>
-
 </html>
